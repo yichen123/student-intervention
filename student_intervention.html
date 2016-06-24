@@ -566,9 +566,12 @@ Testing set has 95 samples.
 <p><strong>Answer: </strong><br>
 I picked AdaBoosting, SVM, and K-Neighbours learning models.</p>
 <ul>
-<li>AdaBoosting is an esemble algorithm that combines several weak learners together, it assigns each learner with some weight and find the overall perdicting result. It is easily overcoming the overfit, but sensitive to the outliers.</li>
-<li>SVM is a algorithm that finding a vector in the data point space. This vector labels the data points based on their positions, and the distances bewteen the line and the points determine the confidence of the prediction. SVM is good when there are lot features in our data.</li>
-<li>KNN is a algorithm that for each target points, it calculates the targets' results based on K closed labeled points around them. This algoritm is simple and fast for training, but cost high space and time for testing. </li>
+<li><p>AdaBoosting is an esemble algorithm that combines several weak learners together, it assigns each learner with some weight and find the overall perdicting result. It is easily overcoming the overfit, but sensitive to the outliers. One big area of applications of this model is objects recognition.</p>
+</li>
+<li><p>SVM is a algorithm that finding a vector in the data point space. This vector labels the data points based on their positions, and the distances bewteen the line and the points determine the confidence of the prediction. SVM is good when there are lot features in our data, but cannot do well when the data size is large or there are noisies. SVM is widely used in image classification.</p>
+</li>
+<li><p>KNN is a algorithm that for each target points, it calculates the targets' results based on K closed labeled points around them. This algoritm does not learn and store the training data, therefore it easy to overcome the noisy of the data. But it costs high space and time for testing and has difficulty on generalization. It is used for the websites' user recommondation.</p>
+</li>
 </ul>
 <p>Back to our situation, as there are 30 features in our data. SVM should be considered. The decision tree should also be considered in classification problem, but it's easy to become overfitting, and therefore AdaBoosting is chosen here. Since our data size is small, KNN should also be considered.</p>
 
@@ -668,7 +671,7 @@ I picked AdaBoosting, SVM, and K-Neighbours learning models.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import the three supervised learning models from sklearn</span>
@@ -688,9 +691,9 @@ I picked AdaBoosting, SVM, and K-Neighbours learning models.</p>
 <span class="c1"># Execute the &#39;train_predict&#39; function for each classifier and each training set size</span>
 <span class="k">for</span> <span class="n">learner</span> <span class="ow">in</span> <span class="n">learners</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">DATA_SIZE</span><span class="p">:</span>
-        <span class="n">X_train_size</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">size</span><span class="p">]</span>
-        <span class="n">y_train_size</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[:</span><span class="n">size</span><span class="p">]</span>
-        <span class="n">train_predict</span><span class="p">(</span><span class="n">learner</span><span class="p">,</span> <span class="n">X_train_size</span><span class="p">,</span> <span class="n">y_train_size</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+        <span class="n">X_train_sized</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">size</span><span class="p">]</span>
+        <span class="n">y_train_sized</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[:</span><span class="n">size</span><span class="p">]</span>
+        <span class="n">train_predict</span><span class="p">(</span><span class="n">learner</span><span class="p">,</span> <span class="n">X_train_sized</span><span class="p">,</span> <span class="n">y_train_sized</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
         <span class="k">print</span> <span class="s1">&#39; &#39;</span>
     <span class="k">print</span> <span class="s1">&#39;========&#39;</span>
     
@@ -707,24 +710,24 @@ I picked AdaBoosting, SVM, and K-Neighbours learning models.</p>
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Training a AdaBoostClassifier using a training set size of 100. . .
-Trained model in 0.1305 seconds
-Made predictions in 0.0041 seconds.
+Trained model in 0.1164 seconds
+Made predictions in 0.0045 seconds.
 F1 score for training set: 0.9778.
-Made predictions in 0.0039 seconds.
+Made predictions in 0.0042 seconds.
 F1 score for test set: 0.7424.
  
 Training a AdaBoostClassifier using a training set size of 200. . .
-Trained model in 0.0937 seconds
-Made predictions in 0.0064 seconds.
+Trained model in 0.1010 seconds
+Made predictions in 0.0061 seconds.
 F1 score for training set: 0.8897.
-Made predictions in 0.0073 seconds.
+Made predictions in 0.0052 seconds.
 F1 score for test set: 0.7259.
  
 Training a AdaBoostClassifier using a training set size of 300. . .
-Trained model in 0.1001 seconds
-Made predictions in 0.0051 seconds.
+Trained model in 0.1050 seconds
+Made predictions in 0.0055 seconds.
 F1 score for training set: 0.8794.
-Made predictions in 0.0039 seconds.
+Made predictions in 0.0042 seconds.
 F1 score for test set: 0.7407.
  
 ========
@@ -732,43 +735,43 @@ Training a SVC using a training set size of 100. . .
 Trained model in 0.0011 seconds
 Made predictions in 0.0007 seconds.
 F1 score for training set: 0.8919.
-Made predictions in 0.0007 seconds.
+Made predictions in 0.0009 seconds.
 F1 score for test set: 0.7737.
  
 Training a SVC using a training set size of 200. . .
-Trained model in 0.0028 seconds
+Trained model in 0.0029 seconds
 Made predictions in 0.0021 seconds.
 F1 score for training set: 0.8795.
 Made predictions in 0.0011 seconds.
 F1 score for test set: 0.8182.
  
 Training a SVC using a training set size of 300. . .
-Trained model in 0.0060 seconds
-Made predictions in 0.0046 seconds.
+Trained model in 0.0059 seconds
+Made predictions in 0.0064 seconds.
 F1 score for training set: 0.8664.
-Made predictions in 0.0015 seconds.
+Made predictions in 0.0019 seconds.
 F1 score for test set: 0.8289.
  
 ========
 Training a KNeighborsClassifier using a training set size of 100. . .
 Trained model in 0.0005 seconds
-Made predictions in 0.0012 seconds.
+Made predictions in 0.0013 seconds.
 F1 score for training set: 0.8592.
-Made predictions in 0.0010 seconds.
+Made predictions in 0.0011 seconds.
 F1 score for test set: 0.7910.
  
 Training a KNeighborsClassifier using a training set size of 200. . .
-Trained model in 0.0005 seconds
-Made predictions in 0.0026 seconds.
+Trained model in 0.0006 seconds
+Made predictions in 0.0027 seconds.
 F1 score for training set: 0.8425.
 Made predictions in 0.0014 seconds.
 F1 score for test set: 0.7941.
  
 Training a KNeighborsClassifier using a training set size of 300. . .
-Trained model in 0.0013 seconds
-Made predictions in 0.0066 seconds.
+Trained model in 0.0006 seconds
+Made predictions in 0.0051 seconds.
 F1 score for training set: 0.8688.
-Made predictions in 0.0022 seconds.
+Made predictions in 0.0019 seconds.
 F1 score for test set: 0.7714.
  
 ========
@@ -926,10 +929,10 @@ F1 score for test set: 0.7714.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong><br>
-Both SVM and k-neighbours have much lower trainning time and prediction time, but their prediction time increase as the size of training data increases. On the other hand, AdaBoosting's predicting time is quite stable as the size of training data increases. Also we can see from the table, the relationship between the size of data point and the predicting time is linear for SVM<br>
-For all classifiers, their testing f1 score are quite similar. But SVM has the least difference between training and testing errors when there are 300 data points. This means it is more closer to the balancing point between overfitting and underfitting.<br>
-Therefore, I would pick SVM since its predicting time accelerating speed with data size is accecptable, and it has the best scoring result.</p>
+<p><strong>Answer: </strong></p>
+<p>Both SVM and k-neighbours have much lower trainning time and prediction time, but their prediction time increase as the size of training data increases. On the other hand, AdaBoosting's predicting time is quite stable as the size of training data increases. Also we can see from the table, the relationship between the size of data point and the predicting time is linear for SVM</p>
+<p>For all classifiers, their testing f1 score are quite similar. But SVM has the least difference between training and testing errors when there are 300 data points. This means it is more closer to the balancing point between overfitting and underfitting.</p>
+<p>Therefore, I would pick SVM since its predicting time accelerating speed with data size is accecptable, and it has the best scoring result.</p>
 
 </div>
 </div>
@@ -950,8 +953,8 @@ Therefore, I would pick SVM since its predicting time accelerating speed with da
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong><br>
-Let us consider for each feature in the data point as a dimension, and support vector machine is an algorithm that finding a vector that best spliting the data points with their labels in the muli-demension space. The distance between the vector and data point represents the confidence of our prediction.</p>
-<p>This means there will a line that determines our students' study results based on their attributes. If a student's overall performance crosses the line, he or she will successfully graduate.</p>
+Let us consider that there is an hidden rule behind our former students' attributes, and allows us to put them into some orders where the students graduated will sit in front of that line, and students did not graduate will sit at bottom of the line. SMV will find the turning point of that line, where the students above it graduated, and the student below it failed. When we trying to predict a student's result, we put him into the line and see it's location. If it above the turning point, this student will graduate, and will fail otherwise.<br>
+There is also a measurement that determine the distance between each individual student and the turning point. With higher distance, the predicting result is more likely to be true, and the student will have higher chance to gradute or fail.</p>
 
 </div>
 </div>
@@ -982,17 +985,19 @@ Let us consider for each feature in the data point as a dimension, and support v
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;GridSearchCV&#39; and &#39;make_scorer&#39;</span>
 <span class="kn">from</span> <span class="nn">sklearn.grid_search</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">make_scorer</span>
+<span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">StratifiedKFold</span>
 <span class="c1"># TODO: Create the parameters list you wish to tune</span>
-<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="mf">0.333</span><span class="p">,</span> <span class="mf">0.666</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.33</span><span class="p">,</span> <span class="mf">1.66</span><span class="p">],</span> <span class="s1">&#39;kernel&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="s1">&#39;poly&#39;</span><span class="p">],</span> <span class="s1">&#39;degree&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]}</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="mf">0.333</span><span class="p">,</span> <span class="mf">0.666</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.33</span><span class="p">,</span> <span class="mf">1.66</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;kernel&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="s1">&#39;linear&#39;</span><span class="p">],</span> <span class="s1">&#39;degree&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]}</span>
 
 <span class="c1"># TODO: Initialize the classifier</span>
-<span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">clf_B</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># TODO: Make an f1 scoring function using &#39;make_scorer&#39; </span>
 
@@ -1000,7 +1005,7 @@ Let us consider for each feature in the data point as a dimension, and support v
 
 
 <span class="c1"># TODO: Perform grid search on the classifier using the f1_scorer as the scoring method</span>
-<span class="n">grid_obj</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="n">f1_scorer</span><span class="p">)</span>
+<span class="n">grid_obj</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="n">f1_scorer</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="p">)</span>
 
 <span class="c1"># TODO: Fit the grid search object to the training data and find the optimal parameters</span>
 <span class="n">grid_obj</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -1023,10 +1028,10 @@ Let us consider for each feature in the data point as a dimension, and support v
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Made predictions in 0.0037 seconds.
-Tuned model has a training F1 score of 0.8270.
-Made predictions in 0.0013 seconds.
-Tuned model has a testing F1 score of 0.8182.
+<pre>Made predictions in 0.0047 seconds.
+Tuned model has a training F1 score of 0.8089.
+Made predictions in 0.0016 seconds.
+Tuned model has a testing F1 score of 0.8050.
 </pre>
 </div>
 </div>
@@ -1051,7 +1056,7 @@ Tuned model has a testing F1 score of 0.8182.
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong><br>
-F1 scores for our turned model are 0.8270 for training, and 0.8182 for testing. The difference is 0.088.<br>
+F1 scores for our turned model are 0.8089 for training, and 0.8050 for testing. The difference is 0.039.<br>
 Both training and testing error are slightly decreased, but the difference between two errors is much smaller. This means our new model is closer to the balancing point between over-fiting and under-fiting and could be considered as better than the untruned model.</p>
 
 </div>
